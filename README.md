@@ -1,6 +1,6 @@
 # scheduler_jang2162
 
-##주요 사용 기술
+## 주요 사용 기술
 
 - [React](https://github.com/facebook/react)
 - [React Router v4](https://github.com/ReactTraining/react-router)
