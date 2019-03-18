@@ -34,7 +34,6 @@ class TestReducer extends ImmerReducer<TestState> {
     changeNameAndDelayedAdd(payload: {addNum:number, name:string}) {}
 }
 
-
 export const TestActions = createActionCreators(TestReducer);
 export default createReducerFunction(TestReducer, initialState);
 

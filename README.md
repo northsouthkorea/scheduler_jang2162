@@ -10,5 +10,3 @@
 - [Immer Reducer](https://github.com/epeli/immer-reducer)
 - [Redux Observable](https://github.com/redux-observable/redux-observable)
 - [RxJS](https://github.com/reactivex/rxjs)
-
-
