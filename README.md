@@ -4,6 +4,7 @@
 
 - [React](https://github.com/facebook/react)
 - [React Router v4](https://github.com/ReactTraining/react-router)
+- [recompose](https://github.com/acdlite/recompose)
 - [Typescript](https://github.com/Microsoft/TypeScript)
 - [Styled Component](https://github.com/styled-components/styled-components)
 - [Redux](https://github.com/reduxjs/redux)
