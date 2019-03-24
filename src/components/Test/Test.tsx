@@ -1,34 +1,18 @@
-import {TestActions} from "@/modules/TestModule";
-import {RootState} from "@/store";
+import {Button} from "@/common/Styled";
+import container, {propType} from "@/components/Test/TestContainer";
+import withVisualizeRender from "@/lib/RenderVisualizer";
 import React from "react";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
 
-const mapStateToProps = (state: RootState) => ({
-    name: state.test.name,
-    value: state.test.counter.value
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-    ...bindActionCreators(TestActions, dispatch)
-});
-
-type TestPropType =
-    ReturnType<typeof mapStateToProps> &
-    ReturnType<typeof mapDispatchToProps>
-
-interface TestProp {test: string}
-
-const Test = (props: TestPropType & TestProp) => {
+const Test = (props: propType & {test: string}) => {
     const click = () => props.changeNameAndDelayedAdd({addNum: 5, name: "NEW TEST"});
     return (
-        <div>
+        <div style={{padding: 20}}>
             {props.test}<br/><br/>
             Name: {props.name} <br/>
             Counter value: {props.value} <br/>
-            <button onClick={click}>TEST</button>
+            <Button onClick={click} >TEST</Button>
         </div>
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+export default container(withVisualizeRender(Test));

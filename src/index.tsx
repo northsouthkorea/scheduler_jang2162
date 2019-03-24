@@ -17,6 +17,6 @@ serviceWorker.unregister();
 
 if (module.hot) {
     module.hot.accept('./App', () => {
-         ReactDOM.render(<App />, document.getElementById('root') as HTMLElement)
+         ReactDOM.render(<App />, document.getElementById('root'))
     })
 }

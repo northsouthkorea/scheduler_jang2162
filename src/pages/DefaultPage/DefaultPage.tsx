@@ -1,9 +1,12 @@
 import React from 'react';
 
 const DefaultPage = () => (
-    <div>
+    <>
+        <header>
+            this is header
+        </header>
         Default Page
-    </div>
+    </>
 );
 
 export default DefaultPage;

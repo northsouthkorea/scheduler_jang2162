@@ -2,7 +2,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {combineEpics, createEpicMiddleware, ofType} from "redux-observable";
 import { BehaviorSubject } from 'rxjs';
-import { mergeMap, takeUntil } from 'rxjs/operators';
+import {mergeMap, takeUntil} from 'rxjs/operators';
 import test, {TestEpics, TestState} from './modules/TestModule';
 
 export interface RootState {
@@ -39,11 +39,9 @@ const hotReloadingEpic: any = (action$: any, ...rest: any) =>
         )
     );
 epicMiddleware.run(hotReloadingEpic);
-
 if (module.hot) {
     module.hot.accept('./', () => {
-        const nextRootEpic = require('./').rootEpic;
         store.dispatch({ type: 'EPIC_END' });
-        epic$.next(nextRootEpic);
+        epic$.next(rootEpic);
     });
 }
