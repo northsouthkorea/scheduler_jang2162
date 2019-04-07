@@ -20,3 +20,9 @@ export const Button = styled.button<ButtonProp>`
     border-color: palevioletred;
   `}
 `;
+
+
+export const FlexContainer = styled.div<{vertical?: boolean, reverse?: boolean}>`
+  display: flex;
+  flex-direction: ${props => (props.vertical ? 'row' : 'column') + props.reverse ? '-reverse' : ''};
+`;

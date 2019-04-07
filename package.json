@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-plugin-polished": "^1.1.0",
     "immer-reducer": "^0.6.0",
+    "moment": "^2.24.0",
+    "polished": "^3.1.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",

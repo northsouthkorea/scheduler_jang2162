@@ -15,17 +15,16 @@ const overrideDev = (config) => {
     )(config)
 }
 
-
 const overrideProd = (config) => {
     customize(
         ...addBabelPlugins(['styled-components', {
             displayName: false,
             fileName: false,
             minify: true
-        }])
+        }]),
+        ...addBabelPlugins(['polished'])
     )(config)
 }
-
 
 module.exports = function override(config) {
     config.resolve = {
@@ -33,12 +32,10 @@ module.exports = function override(config) {
         alias: { '@': path.resolve(__dirname, 'src') },
     };
 
-
-
     if (process.env.NODE_ENV === DEV) {
-        overrideProd(config);
-    } else if (process.env.NODE_ENV === PROD){
         overrideDev(config);
+    } else if (process.env.NODE_ENV === PROD){
+        overrideProd(config);
     }
 
     return config;

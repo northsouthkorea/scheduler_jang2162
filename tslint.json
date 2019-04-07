@@ -10,6 +10,7 @@
     "interface-name": false,
     "object-literal-sort-keys": false,
     "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
     "no-submodule-imports": false,
     "no-console": false,
     "no-empty": false,

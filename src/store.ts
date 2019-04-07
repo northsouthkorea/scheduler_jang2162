@@ -3,19 +3,23 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {combineEpics, createEpicMiddleware, ofType} from "redux-observable";
 import { BehaviorSubject } from 'rxjs';
 import {mergeMap, takeUntil} from 'rxjs/operators';
+import schedulerPage, {SchedulerPageEpics, SchedulerPageState} from './modules/SchedularPageModule';
 import test, {TestEpics, TestState} from './modules/TestModule';
 
 export interface RootState {
     test: TestState;
+    schedulerPage: SchedulerPageState;
 }
 
 const rootReducer = combineReducers<RootState>({
-    test
+    test,
+    schedulerPage
 });
 
 const epicMiddleware = createEpicMiddleware();
 const rootEpic = combineEpics<any>(
-    ...TestEpics
+    ...TestEpics,
+    ...SchedulerPageEpics
 );
 
 const middleware: any[] = [];
