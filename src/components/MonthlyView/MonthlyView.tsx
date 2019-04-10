@@ -3,7 +3,6 @@ import {range} from "@/lib/Utils";
 import moment from "moment";
 import React from 'react';
 
-
 const MonthlyView = (props: {curDate: number}) => {
     const curDate = moment(props.curDate);
     const prevMonth = curDate.clone().date(0);
@@ -12,7 +11,6 @@ const MonthlyView = (props: {curDate: number}) => {
 
     const prevMonthDayOfWeek = prevMonth.day();
     const nextMonthDayOfWeek = nextMonth.day();
-
 
     return (
         <Wrapper>
@@ -50,4 +48,3 @@ const MonthlyView = (props: {curDate: number}) => {
 };
 
 export default MonthlyView;
-
