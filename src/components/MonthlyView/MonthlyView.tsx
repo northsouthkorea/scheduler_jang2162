@@ -1,7 +1,7 @@
 import {Item, Row, Wrapper} from "@/components/MonthlyView/MonthlyViewStyled";
+import {range} from "@/lib/Utils";
 import moment from "moment";
 import React from 'react';
-
 
 const MonthlyView = (props: {curDate: number}) => {
     const curDate = moment(props.curDate);
@@ -11,46 +11,40 @@ const MonthlyView = (props: {curDate: number}) => {
 
     const prevMonthDayOfWeek = prevMonth.day();
     const nextMonthDayOfWeek = nextMonth.day();
-    const rows = Array(rowNum).fill(0).map((e, i) => {
-        return (
-            <Row key={i}>
-                {
-                    // 이전달
-                    i === 0 && prevMonthDayOfWeek !== 6 &&
-                    Array(prevMonthDayOfWeek+1).fill(0)
-                        .map((ee,j)=> (<Item notCurrent key={`before${j}`}><span>{prevMonth.date()-j}</span></Item>)).reverse()
-                }
-
-                {
-                    // 현재
-                    Array(7).fill(0)
-                        .map((ee, j)=> {
-                            const day = j + i * 7 - (prevMonthDayOfWeek === 6 ? -1 : prevMonthDayOfWeek);
-                            return (i === rowNum - 1 ?  nextMonthDayOfWeek === 0 || j < nextMonthDayOfWeek : day > 0) ? day : 0;
-                        })
-                        .filter(j => j !== 0)
-                        .map(day => (<Item key={day}><span>{day}</span></Item>))
-                }
-
-                {
-                    // 다음달
-                    i === rowNum - 1 && nextMonthDayOfWeek !== 0 &&
-                    Array(7-nextMonth.day()).fill(0)
-                        .map((ee,j)=> (<Item notCurrent key={`next${j}`}><span>{j+1}</span></Item>))
-                }
-            </Row>
-        )
-    });
 
     return (
         <Wrapper>
             <Row>
                 {"일월화수목금토".split("").map(text => (<Item key={text}><span>{text}</span></Item>))}
             </Row>
-            {rows}
+            {range(rowNum).map(i => (
+                <Row key={i}>
+                    {
+                        // 이전 달
+                        i === 0 && prevMonthDayOfWeek !== 6 &&
+                        range(prevMonthDayOfWeek+1)
+                            .map(j => (<Item notCurrent key={`before${j}`}><span>{prevMonth.date()-j}</span></Item>)).reverse()
+                    }
+
+                    {
+                        // 해당 달
+                        range(7)
+                            .map(j => {
+                                const day = j + i * 7 - (prevMonthDayOfWeek === 6 ? -1 : prevMonthDayOfWeek);
+                                return (i === rowNum - 1 ?  nextMonthDayOfWeek === 0 || j < nextMonthDayOfWeek : day > 0) ? (<Item key={day}><span>{day}</span></Item>) : null;
+                            })
+                    }
+
+                    {
+                        // 다음 달
+                        i === rowNum - 1 && nextMonthDayOfWeek !== 0 &&
+                        range(7-nextMonth.day()).fill(0)
+                            .map(j => (<Item notCurrent key={`next${j}`}><span>{j+1}</span></Item>))
+                    }
+                </Row>
+            ))}
         </Wrapper>
     )
 };
 
 export default MonthlyView;
-

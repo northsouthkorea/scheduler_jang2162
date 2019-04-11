@@ -10,9 +10,8 @@ const Test = (props: propType & {test: string}) => {
             {props.test}<br/><br/>
             Name: {props.name} <br/>
             Counter value: {props.value} <br/>
-            <Button onClick={click} >TEST</Button>
+            <Button onClick={click}>TEST</Button>
         </div>
     )
 };
-
 export default container(withVisualizeRender(Test));
