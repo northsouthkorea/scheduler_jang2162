@@ -7,7 +7,6 @@ export const TopControl = styled.div`
   height: 48px;
   padding: 8px;
   margin: 0 8px;
-  border-bottom: 1px solid #ddd;
   
   .item-left {
     
@@ -23,4 +22,5 @@ export const ScheduleViewer  = styled.div`
   display: flex;
   flex-grow: 1;
   margin-bottom: 8px;
+  overflow: hidden;
 `;

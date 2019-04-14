@@ -16,14 +16,16 @@ export enum VIEW_TYPE {
 export interface SchedulerPageState {
     viewType: VIEW_TYPE;
     title: string;
-    curDate: number
+    curDate: number;
+    prevDate: number;
 }
 
 const now = moment();
 const initialState: SchedulerPageState = {
     viewType: VIEW_TYPE.CALENDAR_MONTH,
     title: now.format("YYYY년 MM월"),
-    curDate: now.valueOf()
+    curDate: now.valueOf(),
+    prevDate: 0
 };
 
 class SchedulerPageReducer extends ImmerReducer<SchedulerPageState> {
@@ -37,6 +39,7 @@ class SchedulerPageReducer extends ImmerReducer<SchedulerPageState> {
     }
 
     setCurDate (payload: number) {
+        this.draftState.prevDate = this.draftState.curDate;
         this.draftState.curDate = payload;
     }
 }

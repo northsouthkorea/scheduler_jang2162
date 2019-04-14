@@ -69,7 +69,9 @@ const SchedulePage = (props: propType) => {
                 </div>
             </TopControl>
             <ScheduleViewer>
-                {props.viewType === VIEW_TYPE.CALENDAR_MONTH && <MonthlyView curDate={props.curDate} />}
+                {props.viewType === VIEW_TYPE.CALENDAR_MONTH &&
+                    <MonthlyView curDate={props.curDate - props.curDate % 86400000} />
+                }
             </ScheduleViewer>
         </>
     )
