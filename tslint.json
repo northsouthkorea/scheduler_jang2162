@@ -9,6 +9,7 @@
   "rules": {
     "interface-name": false,
     "object-literal-sort-keys": false,
+    "quotemark": [true, "single", "jsx-double"],
     "jsx-boolean-value": false,
     "jsx-no-lambda": false,
     "no-submodule-imports": false,

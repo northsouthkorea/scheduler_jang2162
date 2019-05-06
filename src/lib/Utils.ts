@@ -7,7 +7,7 @@ export const range = (startOrEnd: number, end?: number, step?: number) => {
     }
 
     if (step === undefined) {
-        step = start < end ? 1 : -1 ;
+        step = start < end ? 1 : -1;
     }
-    return [...Array(Math.abs(Math.ceil(end-start/step))).keys()].map(i => start + i * (step as number));
+    return [...Array(Math.abs(Math.ceil(end - start / step))).keys()].map(i => start + i * (step as number));
 };

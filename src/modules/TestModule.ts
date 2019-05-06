@@ -1,9 +1,9 @@
-import {Epic} from "@/lib/SimpleEpic";
-import {RootState} from "@/store";
-import {createActionCreators, createReducerFunction, ImmerReducer} from "immer-reducer";
-import {ofType} from "redux-observable";
-import {concat, of} from "rxjs";
-import {delay, flatMap} from "rxjs/operators";
+import {Epic} from '@/lib/SimpleEpic';
+import {RootState} from '@/store';
+import {createActionCreators, createReducerFunction, ImmerReducer} from 'immer-reducer';
+import {ofType} from 'redux-observable';
+import {concat, of} from 'rxjs';
+import {delay, flatMap} from 'rxjs/operators';
 
 export interface TestState {
     name: string;
@@ -13,7 +13,7 @@ export interface TestState {
 }
 
 const initialState: TestState = {
-    name: "TEST",
+    name: 'TEST',
     counter: {
         value: 555
     }

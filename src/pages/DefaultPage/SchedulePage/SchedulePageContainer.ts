@@ -1,8 +1,8 @@
-import {SchedulerPageActions} from "@/modules/SchedularPageModule";
-import {RootState} from "@/store";
-import moment from "moment";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+import {SchedulerPageActions} from '@/modules/SchedularPageModule';
+import {RootState} from '@/store';
+import moment from 'moment';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state: RootState) => ({
     viewType: state.schedulerPage.viewType,
@@ -12,7 +12,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     ...bindActionCreators(SchedulerPageActions, dispatch),
-    setCurDate: (curDate: moment.Moment) => dispatch(SchedulerPageActions.setCurDate(curDate.valueOf()))
+    setCurDate: (curDate: moment.Moment) => dispatch(SchedulerPageActions.setCurDate(curDate.valueOf(), moment().valueOf()))
 });
 
 export type propType =

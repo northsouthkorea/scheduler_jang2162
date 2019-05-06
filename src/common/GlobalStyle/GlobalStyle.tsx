@@ -1,7 +1,7 @@
-import {createGlobalStyle} from "styled-components";
-import reset from "styled-reset";
-import NamunSquareFontFace from "./NamunSquareFontFace";
-import NamunSquareRoundFontFace from "./NamunSquareRoundFontFace";
+import {createGlobalStyle} from 'styled-components';
+import reset from 'styled-reset';
+import NamunSquareFontFace from './NamunSquareFontFace';
+import NamunSquareRoundFontFace from './NamunSquareRoundFontFace';
 
 const GlobalStyle = createGlobalStyle`
     ${reset}

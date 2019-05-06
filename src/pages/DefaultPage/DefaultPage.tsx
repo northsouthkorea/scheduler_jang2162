@@ -1,6 +1,6 @@
-import {Aside, Container, Header, Section} from "@/pages/DefaultPage/DefaultPageStyled";
+import {Aside, Container, Header, Section} from '@/pages/DefaultPage/DefaultPageStyled';
 import React from 'react';
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom"
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 import SchedulePage from './SchedulePage/SchedulePage';
 
 const DefaultPage = () => (

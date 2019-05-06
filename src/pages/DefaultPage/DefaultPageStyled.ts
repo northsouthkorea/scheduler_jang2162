@@ -1,4 +1,4 @@
-import {rgba} from "polished";
+import {rgba} from 'polished';
 import styled from 'styled-components';
 
 
@@ -7,7 +7,7 @@ export const Header = styled.header`
   position: fixed;
   height: 48px;
   background-color: #ffffff;
-  box-shadow: 0 2px 4px ${rgba("#000", 0.25)};
+  box-shadow: 0 2px 4px ${rgba('#000', 0.25)};
   left: 0;
   right: 0;
 `;

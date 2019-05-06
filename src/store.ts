@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {combineEpics, createEpicMiddleware, ofType} from "redux-observable";
-import { BehaviorSubject } from 'rxjs';
+import {combineEpics, createEpicMiddleware, ofType} from 'redux-observable';
+import {BehaviorSubject} from 'rxjs';
 import {mergeMap, takeUntil} from 'rxjs/operators';
 import schedulerPage, {SchedulerPageEpics, SchedulerPageState} from './modules/SchedularPageModule';
 import test, {TestEpics, TestState} from './modules/TestModule';
@@ -23,7 +23,7 @@ const rootEpic = combineEpics<any>(
 );
 
 const middleware: any[] = [];
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
     middleware.push(applyMiddleware(epicMiddleware));
 } else {
     middleware.push(composeWithDevTools(applyMiddleware(epicMiddleware)));
@@ -45,7 +45,7 @@ const hotReloadingEpic: any = (action$: any, ...rest: any) =>
 epicMiddleware.run(hotReloadingEpic);
 if (module.hot) {
     module.hot.accept('./', () => {
-        store.dispatch({ type: 'EPIC_END' });
+        store.dispatch({type: 'EPIC_END'});
         epic$.next(rootEpic);
     });
 }

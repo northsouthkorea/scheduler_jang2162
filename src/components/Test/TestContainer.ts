@@ -1,7 +1,7 @@
-import {TestActions} from "@/modules/TestModule";
-import {RootState} from "@/store";
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+import {TestActions} from '@/modules/TestModule';
+import {RootState} from '@/store';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 const mapStateToProps = (state: RootState) => ({
     name: state.test.name,

@@ -54,7 +54,7 @@
     "customize-cra": "^0.2.12",
     "react-app-rewired": "^2.1.1",
     "react-global-render-visualizer": "^0.1.1",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "redux-devtools-extension": "^2.13.8",
     "tslint": "^5.13.1",
     "tslint-config-prettier": "^1.18.0",

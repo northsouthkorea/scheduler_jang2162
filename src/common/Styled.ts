@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, {css} from 'styled-components';
 
 interface ButtonProp {
     primary?: boolean
@@ -22,7 +22,7 @@ export const Button = styled.button<ButtonProp>`
 `;
 
 
-export const FlexContainer = styled.div<{vertical?: boolean, reverse?: boolean}>`
+export const FlexContainer = styled.div<{ vertical?: boolean, reverse?: boolean }>`
   display: flex;
   flex-direction: ${props => (props.vertical ? 'row' : 'column') + props.reverse ? '-reverse' : ''};
 `;

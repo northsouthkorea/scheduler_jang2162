@@ -1,2 +1,3 @@
-import {setPrefix} from "immer-reducer";
-setPrefix("MY_APP");
+import {setPrefix} from 'immer-reducer';
+
+setPrefix('MY_APP');
