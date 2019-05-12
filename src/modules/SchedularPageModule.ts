@@ -19,6 +19,7 @@ export enum LAST_CHANGE_FIELD {
 }
 
 export interface SchedulerPageState {
+    firstLoad: boolean;
     viewType: VIEW_TYPE;
     prevViewType: VIEW_TYPE;
     lastChangeField: LAST_CHANGE_FIELD;
@@ -31,6 +32,7 @@ export interface SchedulerPageState {
 
 const now = moment();
 const initialState: SchedulerPageState = {
+    firstLoad: true,
     viewType: VIEW_TYPE.CALENDAR_MONTH,
     prevViewType: VIEW_TYPE.CALENDAR_MONTH,
     lastChangeField: LAST_CHANGE_FIELD.VIEW_TYPE,
@@ -44,6 +46,7 @@ const initialState: SchedulerPageState = {
 class SchedulerPageReducer extends ImmerReducer<SchedulerPageState> {
 
     setViewType(viewType: VIEW_TYPE, timeStamp: number) {
+        this.draftState.firstLoad = false;
         if (viewType !== this.draftState.viewType) {
             this.draftState.lastChangeTimestamp1 = this.draftState.lastChangeTimestamp2;
             this.draftState.lastChangeTimestamp2 = timeStamp;
@@ -58,6 +61,7 @@ class SchedulerPageReducer extends ImmerReducer<SchedulerPageState> {
     }
 
     setCurDate (curDate: number, timeStamp: number) {
+        this.draftState.firstLoad = false;
         this.draftState.lastChangeTimestamp1 = this.draftState.lastChangeTimestamp2;
         this.draftState.lastChangeTimestamp2 = timeStamp;
         this.draftState.prevDate = this.draftState.curDate;

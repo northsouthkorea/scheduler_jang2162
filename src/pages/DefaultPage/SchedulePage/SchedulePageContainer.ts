@@ -7,12 +7,14 @@ import {bindActionCreators} from 'redux';
 const mapStateToProps = (state: RootState) => ({
     viewType: state.schedulerPage.viewType,
     title: state.schedulerPage.title,
-    curDate: state.schedulerPage.curDate
+    curDate: state.schedulerPage.curDate,
+    firstLoad: state.schedulerPage.firstLoad
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
     ...bindActionCreators(SchedulerPageActions, dispatch),
-    setCurDate: (curDate: moment.Moment) => dispatch(SchedulerPageActions.setCurDate(curDate.valueOf(), moment().valueOf()))
+    setCurDate: (curDate: moment.Moment, timestamp: number = NaN) => dispatch(SchedulerPageActions.setCurDate(curDate.valueOf(), isNaN(timestamp) ? moment().valueOf() : timestamp))
+
 });
 
 export type propType =
@@ -20,3 +22,4 @@ export type propType =
     ReturnType<typeof mapDispatchToProps>;
 
 export default connect(mapStateToProps, mapDispatchToProps);
+

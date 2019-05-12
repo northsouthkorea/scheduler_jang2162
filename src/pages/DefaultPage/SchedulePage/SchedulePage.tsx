@@ -8,9 +8,58 @@ import {store} from '@/store';
 import {TweenMax} from 'gsap';
 import moment from 'moment';
 import React from 'react';
+import {RouteComponentProps} from 'react-router';
 import {Transition, TransitionGroup} from 'react-transition-group';
 
-const SchedulePage = (props: propType) => {
+
+const getViewType2ParamStr = function(vt: VIEW_TYPE): string {
+    switch (vt) {
+        case VIEW_TYPE.TIMELINE: return 'timeline';
+        case VIEW_TYPE.CALENDAR_DAY: return 'daily';
+        case VIEW_TYPE.CALENDAR_WEEK: return 'weekly';
+        case VIEW_TYPE.CALENDAR_MONTH: return 'monthly';
+        case VIEW_TYPE.CALENDAR_YEAR: return 'year';
+        default: return '';
+    }
+}
+
+const SchedulePage = (props: propType & RouteComponentProps) => {
+    if (props.location.pathname === '/schedules') {
+        props.history.replace(`/schedules/${getViewType2ParamStr(props.viewType)}/${moment(props.curDate).format('YYYYMMDD')}`);
+    } else {
+        if (props.firstLoad) {
+            const viewTypeMap = {
+                'timeline': VIEW_TYPE.TIMELINE,
+                'daily': VIEW_TYPE.CALENDAR_DAY,
+                'weekly': VIEW_TYPE.CALENDAR_WEEK,
+                'monthly': VIEW_TYPE.CALENDAR_MONTH,
+                'year': VIEW_TYPE.CALENDAR_YEAR,
+            } as any;
+            const params = props.location.pathname.split('/');
+            const viewType = params.length > 2 ? params[2] : '';
+            const date = params.length > 3 ? moment(params[3]) : null;
+            let needChangeViewTypeParam = false;
+            let needChangeCurDateParam = false;
+
+            if (viewType in viewTypeMap) {
+                props.setViewType(viewTypeMap[viewType], 0);
+            } else {
+                needChangeViewTypeParam = true;
+            }
+
+            if (date !== null && date.isValid()) {
+                props.setCurDate(date, 0);
+            } else {
+                needChangeCurDateParam = true;
+            }
+
+            if (needChangeCurDateParam || needChangeViewTypeParam) {
+                props.history.replace(`/schedules/${needChangeViewTypeParam ? getViewType2ParamStr(props.viewType) : params[2]}/${needChangeCurDateParam ? moment(props.curDate).format('YYYYMMDD') : params[3]}`);
+            }
+
+        }
+    }
+
     const prevPage = () => {
         const d = moment(props.curDate);
         switch (props.viewType) {
@@ -33,6 +82,7 @@ const SchedulePage = (props: propType) => {
                 break;
         }
         props.setCurDate(d);
+        props.history.replace(`/schedules/${getViewType2ParamStr(props.viewType)}/${d.format('YYYYMMDD')}`);
     };
 
     const nextPage = () => {
@@ -57,10 +107,15 @@ const SchedulePage = (props: propType) => {
                 break;
         }
         props.setCurDate(d);
+        props.history.replace(`/schedules/${getViewType2ParamStr(props.viewType)}/${d.format('YYYYMMDD')}`);
+    };
+
+    const setViewType = (viewType: VIEW_TYPE) => {
+        props.setViewType(viewType, moment().valueOf());
+        props.history.replace(`/schedules/${getViewType2ParamStr(viewType)}/${moment(props.curDate).format('YYYYMMDD')}`);
     };
 
     const curDate = props.curDate - props.curDate % 86400000;
-
     const onEnter = (node: HTMLElement) => {
         node.style.zIndex = '2';
         const state = store.getState();
@@ -115,11 +170,11 @@ const SchedulePage = (props: propType) => {
                 </div>
 
                 <div className="item-right">
-                    <button onClick={() => props.setViewType(VIEW_TYPE.CALENDAR_DAY, moment().valueOf())}>DAY</button>
-                    <button onClick={() => props.setViewType(VIEW_TYPE.CALENDAR_WEEK, moment().valueOf())}>WEEK</button>
-                    <button onClick={() => props.setViewType(VIEW_TYPE.CALENDAR_MONTH, moment().valueOf())}>MONTH</button>
-                    <button onClick={() => props.setViewType(VIEW_TYPE.CALENDAR_YEAR, moment().valueOf())}>YEAR</button>
-                    <button onClick={() => props.setViewType(VIEW_TYPE.TIMELINE, moment().valueOf())}>TIMELINE</button>
+                    <button onClick={() => setViewType(VIEW_TYPE.CALENDAR_DAY)}>DAY</button>
+                    <button onClick={() => setViewType(VIEW_TYPE.CALENDAR_WEEK)}>WEEK</button>
+                    <button onClick={() => setViewType(VIEW_TYPE.CALENDAR_MONTH)}>MONTH</button>
+                    <button onClick={() => setViewType(VIEW_TYPE.CALENDAR_YEAR)}>YEAR</button>
+                    <button onClick={() => setViewType(VIEW_TYPE.TIMELINE)}>TIMELINE</button>
                 </div>
             </TopControl>
             <ScheduleViewer>
@@ -134,16 +189,15 @@ const SchedulePage = (props: propType) => {
                     >
                         <Wrapper>
                             {props.viewType === VIEW_TYPE.CALENDAR_MONTH &&
-                            <MonthlyView curDate={curDate}/>
+                                <MonthlyView curDate={curDate}/>
                             }
                             {props.viewType === VIEW_TYPE.CALENDAR_WEEK &&
-                            <WeeklyView curDate={curDate}/>
+                                <WeeklyView curDate={curDate}/>
                             }
                             {props.viewType === VIEW_TYPE.CALENDAR_DAY &&
-                            <DailyView curDate={curDate}/>
+                                <DailyView curDate={curDate}/>
                             }
                         </Wrapper>
-
                     </Transition>
                 </TransitionGroup>
             </ScheduleViewer>
